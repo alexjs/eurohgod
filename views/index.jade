@@ -1,0 +1,27 @@
+
+div.topbar.navbar-static-top
+  h3.text-center Now Playing: Ukraine - Ani Lorak - Shady Lady
+div.alert-parent  
+if message
+  div.alert.alert-info.text-center #{message.text}
+    button(type="button", class="close", data-dismiss="alert") &times;
+end
+
+div.rules
+  form.text-center(method='POST', id='drink', action="/drink")
+    div.btn-group.btn-group-vertical(style="width:40%")
+        each rule, index in rules
+          if ( index % 2 === 0)
+            div.rule
+              button(type="submit", class="btn primary btn-large btn-block", name="rule_id", value="#{rule.id}") #{rule.name}
+  
+    div.btn-group.btn-group-vertical(style="width:40%")
+       each rule, index in rules
+         if ( index % 2 === 1) 
+           div.rule
+             button(type="submit", class="btn primary btn-large btn-block", name="rule_id", value="#{rule.id}") #{rule.name}
+div.stats.text-center
+  h3 Your local drinks: #{drinks}! Total global drinks currently at #{globalDrinksCount}
+  if message.rule
+    h3 Your last rule: #{message.rule}
+  end  

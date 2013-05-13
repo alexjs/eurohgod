@@ -9,7 +9,6 @@ var express = require('express')
   , jquery = require('jquery')
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
-  , alex = require('./routes/alex')
   , MongoStore = require('connect-mongo')(express)
   ;
 

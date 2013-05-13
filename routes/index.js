@@ -6,7 +6,7 @@
 exports.index = function(req, res){
   var db = require("../lib/db");
 
-  if (!req.session.drinks) { req.session.drinks = 0; drinks = 0;}
+  if (!req.session.actions ) { req.session.actions = 0; actions = 0;}
   if (!req.session.rulesPlayed) { req.session.rulesPlayed = []; }
 
   if (req.session.message) {
@@ -16,18 +16,18 @@ exports.index = function(req, res){
     message = false;
   }
 
-  drinks = req.session.drinks;
-  db.drinks.count({}, function(err, globalDrinksCount) {
+  actions = req.session.actions;
+  db.actions.count({}, function(err, globalActionsCount) {
     if( err ) {
-      console.log("No drinks found");
+      console.log("No actions found");
     }
     else { 
-      db.drinks.aggregate([{ $group: { _id: "$rule", total : { $sum : 1 }}}], function(err, globalDrinksList) {
+      db.actions.aggregate([{ $group: { _id: "$rule", total : { $sum : 1 }}}], function(err, globalActionsList) {
         if( err ) {
-          console.log("Unable to aggregate drinks list");
+          console.log("Unable to aggregate actions list");
         }
         else { 
-          res.render('index', { title: 'Eurovision Drinkalong', globalDrinksList: globalDrinksList, globalDrinksCount: format_number(globalDrinksCount)});
+          res.render('index', { title: 'Eurovision Drinkalong', globalActionsList: globalActionsList, globalActionsCount: format_number(globalActionsCount)});
         }
       });
     }

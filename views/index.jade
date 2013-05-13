@@ -19,7 +19,7 @@ if message
 end
 
 div.rules
-  form.text-center(method='POST', id='drink', action="/drink")
+  form.text-center(method='POST', id='action', action="/submit")
     div.btn-group.btn-group-vertical(style="width:40%")
         each rule, index in rules
           if ( index % 2 === 0)
@@ -32,13 +32,15 @@ div.rules
            div.rule
              button(type="submit", class="btn primary btn-large btn-block", name="rule_id", value="#{rule.id}") #{rule.name}
 div.stats.text-center
-  h3 Your local drinks: #{drinks}! Total global drinks currently at #{globalDrinksCount}
+  h3 Your local drinks: #{actions}! Total global drinks currently at #{globalActionsCount}
   if message.rule
     h3 Your last rule: #{message.rule}
   end  
 
 #tagcloud
   div.tags
-    each globalDrink in globalDrinksList
+    each globalAction in globalActionsList
       div.tag.text-center
-        a(href="#", rel="#{globalDrink.total}") #{rules[globalDrink._id-1].name}
+        a(href="#", rel="#{globalAction.total}") #{rules[globalAction._id-1].name}
+
+include footer.jade

@@ -9,6 +9,7 @@ var express = require('express')
   , jquery = require('jquery')
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
+  , alex = require
   , MongoStore = require('connect-mongo')(express)
   ;
 
@@ -58,7 +59,7 @@ app.error(function(err, req, res, next){
 
 rules = []
 rulesPlayed = []
-drinks = 0
+actions = 0
 
 
 var db = require("./lib/db");
@@ -78,7 +79,8 @@ db.rules.find({}, function(err, rulesDb) {
 // Routes
 
 app.get('/', routes.index);
-app.post('/drink', update.submit);
+app.get('/alex', alex.alex);
+app.post('/submit', update.submit);
 app.all('*', redirect.redirect);
 
 

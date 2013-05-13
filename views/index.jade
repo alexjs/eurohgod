@@ -1,3 +1,14 @@
+script
+  $.fn.tagcloud.defaults = {
+    size: {start: 14, end: 18, unit: 'pt'},
+    color: {start: '#cde', end: '#f52'}
+  };
+
+  $(function () {
+    $('#tagcloud a').tagcloud();
+  });
+
+
 
 div.topbar.navbar-static-top
   h3.text-center Now Playing: Ukraine - Ani Lorak - Shady Lady
@@ -25,3 +36,9 @@ div.stats.text-center
   if message.rule
     h3 Your last rule: #{message.rule}
   end  
+
+#tagcloud
+  div.tags
+    each globalDrink in globalDrinksList
+      div.tag.text-center
+        a(href="#", rel="#{globalDrink.total}") #{rules[globalDrink._id-1].name}

@@ -18,11 +18,18 @@ exports.index = function(req, res){
 
   drinks = req.session.drinks;
   db.drinks.count({}, function(err, globalDrinksCount) {
-    if( err || !globalDrinksCount) {
+    if( err ) {
       console.log("No drinks found");
     }
     else { 
-      res.render('index', { title: 'Eurovision Drinkalong', globalDrinksCount: format_number(globalDrinksCount)});
+      db.drinks.aggregate([{ $group: { _id: "$rule", total : { $sum : 1 }}}], function(err, globalDrinksList) {
+        if( err ) {
+          console.log("Unable to aggregate drinks list");
+        }
+        else { 
+          res.render('index', { title: 'Eurovision Drinkalong', globalDrinksList: globalDrinksList, globalDrinksCount: format_number(globalDrinksCount)});
+        }
+      });
     }
   });
 };

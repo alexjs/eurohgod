@@ -1,6 +1,6 @@
 script
   $.fn.tagcloud.defaults = {
-    size: {start: 14, end: 18, unit: 'pt'},
+    size: {start: 12, end: 20, unit: 'pt'},
     color: {start: '#cde', end: '#f52'}
   };
 
@@ -9,38 +9,73 @@ script
   });
 
 
-#wrap
-  div.topbar.navbar-static-top
-    h3.text-center Now Playing: Ukraine - Ani Lorak - Shady Lady
-  div.alert-parent  
-  if message
-    div.alert.alert-info.text-center #{message.text}
-      button(type="button", class="close", data-dismiss="alert") &times;
-  end
-  
-  div.rules
-    form.text-center(method='POST', id='action', action="/submit")
-      div.btn-group.btn-group-vertical(style="width:40%")
-          each rule, index in rules
-            if ( index % 2 === 0)
-              div.rule
-                button(type="submit", class="btn primary btn-large btn-block", name="rule_id", value="#{rule.id}") #{rule.name}
-    
-      div.btn-group.btn-group-vertical(style="width:40%")
-         each rule, index in rules
-           if ( index % 2 === 1) 
-             div.rule
-               button(type="submit", class="btn primary btn-large btn-block", name="rule_id", value="#{rule.id}") #{rule.name}
-  div.stats.text-center
-    h3 Your local drinks: #{actions}! Total global drinks currently at #{globalActionsCount}
-    if message.rule
-      h3 Your last rule: #{message.rule}
-    end  
-  
-  #tagcloud
-    div.tags
-      each globalAction in globalActionsList
-        div.tag.text-center
-          a(href="#", rel="#{globalAction.total}") #{rules[globalAction._id-1].name}
-  
-  include footer.jade 
+#wrap 
+  #container-fluid
+    div.hero-unit
+      h1.text-center Eur-oh-god 
+      p.lead.text-center A Eurovision drinking game
+    div.alert-parent  
+    if message
+      div.alert.alert-info.text-center 
+        h4.message-type #{message.type}
+        | #{message.text}
+        button(type="button", class="close", data-dismiss="alert") &times;
+    end
+    div.now-playing.row-fluid
+      h3.text-center Now Playing: Ukraine - Ani Lorak - Shady Lady
+    div.rules.row-fluid
+      form(method='POST', id='action', action="/submit")
+        div.btn-group.btn-group-vertical.span6
+            each rule, index in rules
+              if ( index % 2 === 0)
+                div.rule
+                  button(type="submit", class="btn btn-block btn-large", name="rule_id", value="#{rule.id}") #{rule.name}
+      
+        div.btn-group.btn-group-vertical.span6
+           each rule, index in rules
+             if ( index % 2 === 1) 
+               div.rule
+                 button(type="submit", class="btn btn-block btn-large", name="rule_id", value="#{rule.id}") #{rule.name}
+    div.modal.hide(id="statsModal")
+      modal-header
+         button(type="button", class="close", data-dismiss="modal") &times;
+         h3.text-center Total Drinky Stats!
+      modal-body
+
+        each globalAction in globalActionsList
+          ul.stats
+            li #{rules[globalAction._id-1].name} - #{globalAction.total}
+      modal-footer
+
+    div.stats.row-fluid.text-center
+      ul.thumbnails
+        li.span4
+          h3 Stats
+          strong Your local drinks
+          if actions == 0
+            p None yet. Boo.
+          else
+            p #{actions}!
+          strong Total global drinks
+          p #{globalActionsCount}!
+
+        li.span4
+            if message.rule
+              h3 Your last rule:
+              strong #{message.rule}
+              p #{message.text}
+            else
+              h3 Pick a rule above
+            end
+            p 
+            a(href="/restart") Reset 
+            | | 
+            a(href="/") Refresh
+        li.span4     
+          #tagcloud
+            h3 Recent Global Drinky Trends
+            each globalAction in globalActionsList
+                div.tag.text-center.span3
+                  a(href="#statsModal", rel="#{globalAction.total}", data-toggle="modal") #{rules[globalAction._id-1].name}
+  #push
+include footer.jade 

@@ -80,6 +80,10 @@ db.rules.find({}, function(err, rulesDb) {
 
 app.get('/', routes.index);
 app.post('/submit', update.submit);
+app.get('/restart', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
 app.all('*', redirect.redirect);
 
 

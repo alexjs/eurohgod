@@ -14,14 +14,11 @@
 
 
 @media (max-width: 767px) {
-
-  .page.header  {
-    height: 60px;
-  }
   .hero-unit h1 {
-    font-size: ;
+    font-size: 30px;
   }
-  .lead {
-    font-size: small;
+  .p.subtitle {
+    font-size: 15px;
+    margin-bottom: 0px;
   }
 }

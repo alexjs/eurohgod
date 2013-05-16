@@ -10,19 +10,19 @@ script
 
 
 #wrap 
-  #container-fluid
-    div.hero-unit
-      h1.text-center Eur-oh-god 
-      p.lead.text-center A Eurovision drinking game
+  #container
+    header.header.hero-unit.page-header
+      div.row-fluid.text-center
+        h1 Eur-oh-god 
+        p.lead A Eurovision drinking game
     div.alert-parent  
     if message
       div.alert.alert-info.text-center 
         h4.message-type #{message.type}
-        | #{message.text}
+        p #{message.text}
         button(type="button", class="close", data-dismiss="alert") &times;
     end
-    div.now-playing.row-fluid
-      h3.text-center Now Playing: Ukraine - Ani Lorak - Shady Lady
+
     div.rules.row-fluid
       form(method='POST', id='action', action="/submit")
         div.btn-group.btn-group-vertical.span6

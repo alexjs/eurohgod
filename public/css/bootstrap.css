@@ -4223,7 +4223,7 @@ a.thumbnail:focus {
 }
 .alert .close {
   position: relative;
-  top: -2px;
+  top: -20px;
   right: -21px;
   line-height: 20px;
 }

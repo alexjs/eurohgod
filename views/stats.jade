@@ -1,0 +1,3 @@
+each globalAction in globalActionsList
+  div.tag.text-center.span3
+    a(href="#statsModal", rel="#{globalAction.total}", data-toggle="modal") #{rules[globalAction._id-1].name}

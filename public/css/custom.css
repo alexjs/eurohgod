@@ -11,9 +11,3 @@
 .alert h4 {
     text-transform: uppercase;
 }
-
-
-.alert .close {
-  position: relative;
-  top: -20px !important;
-}

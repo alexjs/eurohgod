@@ -27,9 +27,10 @@ script
     div.alert-parent  
     if message
       div.alert.alert-info.text-center 
+        button(type="button", class="close", data-dismiss="alert") &times;
         h4.message-type #{message.type}
         p #{message.text}
-        button(type="button", class="close", data-dismiss="alert") &times;
+      
     end
 
     div.rules.row-fluid

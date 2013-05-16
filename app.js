@@ -9,6 +9,7 @@ var express = require('express')
   , jquery = require('jquery')
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
+  , stats = require('./routes/stats')
   , MongoStore = require('connect-mongo')(express)
   ;
 
@@ -79,6 +80,7 @@ db.rules.find({}, function(err, rulesDb) {
 // Routes
 
 app.get('/', routes.index);
+app.all('/stats', stats.fetch);
 app.post('/submit', update.submit);
 app.get('/restart', function(req, res) {
   req.session.destroy();

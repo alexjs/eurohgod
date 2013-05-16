@@ -8,6 +8,15 @@ script
     $('#tagcloud a').tagcloud();
   });
 
+script
+  $(function(){
+    $.ajax({
+      url: '/stats',
+      success: function(data){
+        
+      }
+    });
+  });
 
 #wrap 
   #container
@@ -71,11 +80,9 @@ script
             a(href="/restart") Reset 
             | | 
             a(href="/") Refresh
-        li.span4     
-          #tagcloud
-            h3 Recent Global Drinky Trends
-            each globalAction in globalActionsList
-                div.tag.text-center.span3
-                  a(href="#statsModal", rel="#{globalAction.total}", data-toggle="modal") #{rules[globalAction._id-1].name}
+        li.span4
+          h3 Recent Global Drinky Trends:
+          #tagcloud!= partial('stats')
+
   #push
 include footer.jade 

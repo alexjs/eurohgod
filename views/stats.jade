@@ -1,3 +1,6 @@
-each globalAction in globalActionsList
-  div.tag.text-center.span3
-    a(href="#statsModal", rel="#{globalAction.total}", data-toggle="modal") #{rules[globalAction._id-1].name}
+if globalActionsList.length
+  each globalAction in globalActionsList
+    div.tag.text-center.span3
+      a(href="#statsModal", rel="#{globalAction.total}", data-toggle="modal") #{rules[globalAction._id-1].name}
+else
+  p No one's registered a drink in 10m. Charge your glasses!

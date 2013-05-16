@@ -1,8 +1,11 @@
 // Fetch stats
+// We gather them once but render twice. I don't think there's anything useful about this - so debate whether it's worth doing at all.
 var db = require("../lib/db");
 
-exports.fetch = function (req,res){  
-  db.actions.aggregate([{ $match: { timestamp: { $gt: 1368699159600 } }  }, { $group: { _id: "$rule", total : { $sum : 1 }}}], function(err, globalActionsList) {
+exports.fetch = function (req,res){ 
+  var timeWindow = 600000 // 10m
+  var aggregateTime = (new Date).getTime()-timeWindow
+  db.actions.aggregate([{ $match: { timestamp: { $gt: aggregateTime } }  }, { $group: { _id: "$rule", total : { $sum : 1 }}}], function(err, globalActionsList) {
     if( err ) {
       console.log("Unable to aggregate actions list");
     }

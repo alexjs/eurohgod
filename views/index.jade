@@ -58,7 +58,6 @@ script
               p #{message.text}
             else
               h3 Pick a rule above
-            end
             p 
             a(href="/restart") Reset 
             | | 
@@ -70,7 +69,7 @@ script
               $('#statsModal').load('/stats-modal', function() {})
               $('#tagcloud').load('/stats', function() {
                 $.fn.tagcloud.defaults = {
-                  size: {start: 12, end: 20, unit: 'pt'},
+                  size: {start: 12, end: 16, unit: 'pt'},
                   color: {start: '#cde', end: '#f52'}
                 };
                 $(function () {

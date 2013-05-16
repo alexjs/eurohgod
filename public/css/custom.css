@@ -14,8 +14,12 @@
 
 
 @media (max-width: 767px) {
+  .hero-unit {
+    padding: 1px !important;
+  }
   .hero-unit h1 {
     font-size: 30px;
+    margin: 2px;
   }
   .p.subtitle {
     font-size: 15px;

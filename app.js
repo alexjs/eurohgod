@@ -3,15 +3,17 @@
  * Module dependencies.
  */
 
+
 var express = require('express')
   , routes = require('./routes')
   , csv = require('ya-csv')
   , jquery = require('jquery')
+  , MongoStore = require('connect-mongo')(express)
+// We define each route distinctly here, which could be cleaned up.
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
   , stats = require('./routes/stats')
   , statsModal = stats
-  , MongoStore = require('connect-mongo')(express)
   ;
 
 
@@ -47,16 +49,6 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-// Errors
-
-app.error(function(err, req, res, next){
-    if (err instanceof NotFound) {
-        res.render('404.jade');
-    } else {
-        next(err);
-    }
-});
-
 // Load sites
 
 rules = []
@@ -88,9 +80,9 @@ app.get('/restart', function(req, res) {
   req.session.destroy();
   res.redirect('/');
 });
+
+// Catch the rest, bounce back
 app.all('*', redirect.redirect);
-
-
 
 var port = process.env.PORT || 3000;
 app.listen(port, function(){

@@ -11,3 +11,17 @@
 .alert h4 {
     text-transform: uppercase;
 }
+
+
+@media (max-width: 767px) {
+
+  .page.header  {
+    height: 60px;
+  }
+  .hero-unit h1 {
+    font-size: ;
+  }
+  .lead {
+    font-size: small;
+  }
+}

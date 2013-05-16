@@ -10,6 +10,7 @@ var express = require('express')
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
   , stats = require('./routes/stats')
+  , statsModal = stats
   , MongoStore = require('connect-mongo')(express)
   ;
 
@@ -81,6 +82,7 @@ db.rules.find({}, function(err, rulesDb) {
 
 app.get('/', routes.index);
 app.all('/stats', stats.fetch);
+app.all('/stats-modal', stats.fetch, {local: {modal: true}});
 app.post('/submit', update.submit);
 app.get('/restart', function(req, res) {
   req.session.destroy();

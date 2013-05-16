@@ -8,15 +8,6 @@ script
     $('#tagcloud a').tagcloud();
   });
 
-script
-  $(function(){
-    $.ajax({
-      url: '/stats',
-      success: function(data){
-        
-      }
-    });
-  });
 
 #wrap 
   #container
@@ -47,15 +38,6 @@ script
                div.rule
                  button(type="submit", class="btn btn-block btn-large", name="rule_id", value="#{rule.id}") #{rule.name}
     div.modal.hide(id="statsModal")
-      modal-header
-         button(type="button", class="close", data-dismiss="modal") &times;
-         h3.text-center Total Drinky Stats!
-      modal-body
-
-        each globalAction in globalActionsList
-          ul.stats
-            li #{rules[globalAction._id-1].name} - #{globalAction.total}
-      modal-footer
 
     div.stats.row-fluid.text-center
       ul.thumbnails
@@ -83,7 +65,21 @@ script
             a(href="/") Refresh
         li.span4
           h3 Recent Global Drinky Trends:
-          #tagcloud!= partial('stats')
+          script(type='text/javascript')
+            $(document).ready(function(){
+              $('#statsModal').load('/stats-modal', function() {})
+              $('#tagcloud').load('/stats', function() {
+                $.fn.tagcloud.defaults = {
+                  size: {start: 12, end: 20, unit: 'pt'},
+                  color: {start: '#cde', end: '#f52'}
+                };
+                $(function () {
+                  $('#tagcloud a').tagcloud();
+                });
+              });
+            });
+          #tagcloud
+
 
   #push
 include footer.jade 

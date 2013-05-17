@@ -1,0 +1,4 @@
+- Stop using !important in CSS, switch to LESS
+- Refactor functions out of extra.js, or use it exclusively
+- Improve 'routes' definitions in top of app.js
+- Try to externalise callback definitions for improved readability

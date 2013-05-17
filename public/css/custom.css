@@ -26,3 +26,10 @@
     margin-bottom: 0px;
   }
 }
+
+
+@media (min-width: 768px) and (max-width: 979px) { 
+  .row-fluid [class*="span"] {
+    margin-left: 0px !important;
+  }
+}

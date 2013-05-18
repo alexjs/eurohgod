@@ -3,7 +3,7 @@
 var db = require("../lib/db");
 
 exports.fetch = function (req,res){ 
-  var timeWindow = 600000 // 10m
+  var timeWindow = 120000 // 2m
   var aggregateTime = (new Date).getTime()-timeWindow
   db.actions.aggregate([{ $match: { timestamp: { $gt: aggregateTime } }  }, { $group: { _id: "$rule", total : { $sum : 1 }}}], function(err, globalActionsList) {
     if( err ) {

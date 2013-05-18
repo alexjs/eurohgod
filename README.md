@@ -7,5 +7,5 @@ Requirements:
     - Node Packages (defined in package.json, install with npm install)
 
 Optional:
-	- Varnish for caching (see extra/eurohgod.vcl)
+	- Varnish for caching (see extra/varnish/eurohgod.vcl)
 

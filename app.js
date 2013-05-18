@@ -13,6 +13,7 @@ var express = require('express')
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
   , stats = require('./routes/stats')
+  , info = require('./routes/info')
   , statsModal = stats
   ;
 
@@ -77,6 +78,7 @@ db.rules.find({}, function(err, rulesDb) {
 app.get('/', routes.index);
 app.all('/stats', stats.fetch);
 app.all('/stats-modal', stats.fetch, {local: {modal: true}});
+app.all('/nowplaying', info.nowplaying);
 app.post('/submit', update.submit);
 app.get('/restart', function(req, res) {
   req.session.destroy();

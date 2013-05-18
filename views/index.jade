@@ -39,6 +39,7 @@ script
                  button(type="submit", class="btn btn-block btn-large", name="rule_id", value="#{rule.id}") #{rule.name}
     div.modal.hide(id="statsModal")
 
+
     div.stats.row-fluid.text-center
       ul.thumbnails
         li.span4
@@ -52,20 +53,23 @@ script
           p #{globalActionsCount}!
 
         li.span4
-            if message.rule
-              h3 Your last rule:
-              strong #{message.rule}
-              p #{message.text}
-            else
-              h3 Pick a rule above
-            p 
-            a(href="/restart") Reset 
-            | | 
-            a(href="/") Refresh
+          div.nowPlaying-row.row-fluid.text-center
+          #nowPlaying
+
+          if message.rule
+            h3 Your last rule:
+            strong #{message.rule}
+            p #{message.text}
+          else
+            h3 Pick a rule above
+          a(href="/restart") Reset 
+          | | 
+          a(href="/") Refresh
         li.span4
           h3 Recent Global Drinky Trends
           script(type='text/javascript')
             $(document).ready(function(){
+              $('#nowPlaying').load('/nowplaying', function() {})
               $('#statsModal').load('/stats-modal', function() {})
               $('#tagcloud').load('/stats', function() {
                 $.fn.tagcloud.defaults = {

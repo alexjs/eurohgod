@@ -6,15 +6,14 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , csv = require('ya-csv')
   , jquery = require('jquery')
   , MongoStore = require('connect-mongo')(express)
+  , _ = require('underscore')
   // We define each route distinctly here, which could be cleaned up.
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
   , stats = require('./routes/stats')
   , statsModal = stats
-  , _ = require('underscore')
   ;
 
 

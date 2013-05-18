@@ -9,11 +9,12 @@ var express = require('express')
   , csv = require('ya-csv')
   , jquery = require('jquery')
   , MongoStore = require('connect-mongo')(express)
-// We define each route distinctly here, which could be cleaned up.
+  // We define each route distinctly here, which could be cleaned up.
   , update = require('./routes/update')
   , redirect = require('./routes/redirect')
   , stats = require('./routes/stats')
   , statsModal = stats
+  , _ = require('underscore')
   ;
 
 
@@ -67,6 +68,8 @@ db.rules.find({}, function(err, rulesDb) {
       'type': data['type']
     });
   } );
+  // Sort the array before we return it. 
+  rules = _.sortBy( rules, 'id' )
 });
 
 

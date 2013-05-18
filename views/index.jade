@@ -57,16 +57,14 @@ script
           #nowPlaying
 
           if message.rule
-            h3 Your last rule:
+            h3 Your last rule
             strong #{message.rule}
             p #{message.text}
           else
             h3 Pick a rule above
-          a(href="/restart") Reset 
-          | | 
-          a(href="/") Refresh
+
         li.span4
-          h3 Recent Global Drinky Trends
+          h3 Recent Global Drink Trends
           script(type='text/javascript')
             $(document).ready(function(){
               $('#nowPlaying').load('/nowplaying', function() {})
@@ -82,5 +80,21 @@ script
               });
             });
           #tagcloud
+    div.share.row-fluid.text-center
+     
+      if actions == 0
+        a(target="_blank", href="http://twitter.com/intent/tweet?source=webclient&text=I'm%20tracking%20my%20drinking%20during%20Eurovision%20with%20http%3A%2F%2Feurohgod.com%20%23eurovision%20%23eurohgod") Twitter
+      else
+        if actions == 1
+          a(target="_blank", href="http://twitter.com/intent/tweet?source=webclient&text=I've%20only%20had%20#{actions}%20shot%20this%20Eurovision%2C%20according%20to%20http%3A%2F%2Feurohgod.com%20%23eurovision%20%23eurohgod") Twitter
+  
+        else
+          a(target="_blank", href="http://twitter.com/intent/tweet?source=webclient&text=I've%20had%20#{actions}%20shots%20this%20Eurovision%2C%20according%20to%20http%3A%2F%2Feurohgod.com%20%23eurovision%20%23eurohgod") Tweet
+      |  | 
+      a(target="_blank", href="http://www.facebook.com/sharer.php?u=http://eurohgod.com") Facebook
+      |  | 
+      a(href="/restart") Reset
+      |  | 
+      a(href="/") Reload
   #push
 include footer.jade 

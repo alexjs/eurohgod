@@ -27,7 +27,7 @@ exports.index = function(req, res){
           console.log("Unable to aggregate actions list");
         }
         else { 
-          res.render('index', { title: 'Eurovision Drinkalong', globalActionsCount: format_number(globalActionsCount)});
+          res.render('index', { title: 'EurOhGod - The Eurovision Drinking Game', globalActionsCount: format_number(globalActionsCount)});
         }
       });
     }
